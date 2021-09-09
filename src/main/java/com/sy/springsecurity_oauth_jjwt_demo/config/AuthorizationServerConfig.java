@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -72,8 +73,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .accessTokenValiditySeconds(60)
                 //刷新令牌过期时间
                 .refreshTokenValiditySeconds(86400)
+                //自动授权
+                .autoApprove(true)
                 //重定向地址，通过重定向地址获取授权码，定向到哪里无所谓，重要的是拿到的授权码
-                .redirectUris("http://www.baidu.com");
+                //.redirectUris("http://www.baidu.com");
+                //重定向到 sso 测试的 oauth2_client01_demo 项目中
+                .redirectUris("http://localhost:8081/login");
     }
 
     /**
@@ -109,6 +114,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     //}
 
 
+    //单独配置了，所以不在这里配置了
     //@Bean
     //public TokenStore jwtTokenStore() {
     //    return new JwtTokenStore(jwtAccessTokenConverter());
@@ -121,4 +127,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     //    jwtAccessTokenConverter.setSigningKey("test");
     //    return jwtAccessTokenConverter;
     //}
+
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        //获取秘钥必须要身份认证，单点登录必须要配置
+        security.tokenKeyAccess("isAuthenticated()");
+    }
 }
