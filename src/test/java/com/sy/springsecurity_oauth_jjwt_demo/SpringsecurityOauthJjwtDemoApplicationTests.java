@@ -1,17 +1,48 @@
 package com.sy.springsecurity_oauth_jjwt_demo;
 
+import com.sy.springsecurity_oauth_jjwt_demo.utils.MybatisPlusGeneratorUtil;
+import com.sy.springsecurity_oauth_jjwt_demo.utils.param.GeneratorParam;
 import io.jsonwebtoken.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 import java.util.Date;
-import java.util.Map;
 
 @SpringBootTest
 class SpringsecurityOauthJjwtDemoApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void testGenerator() {
+        GeneratorParam param = new GeneratorParam();
+        param.setOpenBeanPathCustom(false);
+        param.setTargetParentPackageName("com.sy.springsecurity_oauth_jjwt_demo.restful");
+
+        param.setAuthor("孙宇");
+
+        param.setDbTableList("sys_user");
+
+        param.setDbDriverName("com.mysql.cj.jdbc.Driver");
+        //param.setDbUrl("jdbc:mysql://172.16.10.223:3306/hs_leitsm_duty?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true");
+        param.setDbUrl("jdbc:mysql://localhost:3306/security?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true");
+        param.setDbUserName("root");
+        param.setDbPassword("root");
+        //param.setDbPassword("root");
+        MybatisPlusGeneratorUtil.generator(param);
+    }
+
+    @Test
+    public void encodePassword() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println(encoder.encode("123"));
+    }
+
+    @Test
+    public void getIdStr() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println(IdWorker.getIdStr());
+        }
     }
 
     /**
@@ -102,5 +133,4 @@ class SpringsecurityOauthJjwtDemoApplicationTests {
         System.out.println("sub："+claims.getSubject());
         System.out.println("iat："+claims.getIssuedAt());
     }
-
 }

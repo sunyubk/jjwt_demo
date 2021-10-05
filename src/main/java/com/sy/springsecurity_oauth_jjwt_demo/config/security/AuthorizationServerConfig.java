@@ -1,8 +1,6 @@
-package com.sy.springsecurity_oauth_jjwt_demo.config;
+package com.sy.springsecurity_oauth_jjwt_demo.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ConditionalOnBlockingDiscoveryEnabled;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,8 +15,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +74,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //重定向地址，通过重定向地址获取授权码，定向到哪里无所谓，重要的是拿到的授权码
                 //.redirectUris("http://www.baidu.com");
                 //重定向到 sso 测试的 oauth2_client01_demo 项目中
-                .redirectUris("http://localhost:8081/login");
+                .redirectUris("http://localhost:8080/login");
     }
 
     /**

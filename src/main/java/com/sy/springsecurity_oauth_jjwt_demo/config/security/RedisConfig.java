@@ -1,4 +1,4 @@
-package com.sy.springsecurity_oauth_jjwt_demo.config;
+package com.sy.springsecurity_oauth_jjwt_demo.config.security;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

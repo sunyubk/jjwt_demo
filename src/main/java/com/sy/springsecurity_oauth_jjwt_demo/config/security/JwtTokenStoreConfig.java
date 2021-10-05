@@ -1,6 +1,5 @@
-package com.sy.springsecurity_oauth_jjwt_demo.config;
+package com.sy.springsecurity_oauth_jjwt_demo.config.security;
 
-import org.springframework.cloud.util.ConditionalOnBootstrapEnabled;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.TokenStore;
