@@ -142,13 +142,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/logout/**"
                 ).permitAll()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .antMatchers("/login.html").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 //放开所有表单提交
                 .formLogin()
+                .loginPage("/toLogin")
                 .permitAll()
                 .and()
                 .csrf().disable();
+    }
+
+    private void  test() {
+
     }
 }
