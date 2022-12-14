@@ -108,7 +108,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //String password = passwordEncoder().encode("1");
             return new User(username,sysUser.getPassword(),authorities);
         };
-
     }
 
 
@@ -155,6 +154,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private void  test() {
-        sos
+        System.out.println(1111);
     }
 }
